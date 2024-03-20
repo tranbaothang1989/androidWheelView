@@ -232,7 +232,7 @@ public class LoopView extends View {
             paintOuterText = new Paint();
             paintOuterText.setColor(outerTextColor);
             paintOuterText.setAntiAlias(true);
-            paintOuterText.setTypeface(typeface);
+            //paintOuterText.setTypeface(typeface);
             paintOuterText.setTextSize(textSize);
         }
 
@@ -242,7 +242,7 @@ public class LoopView extends View {
             paintCenterText.setColor(centerTextColor);
             paintCenterText.setAntiAlias(true);
             paintCenterText.setTextScaleX(scaleX);
-            paintCenterText.setTypeface(typeface);
+            //paintCenterText.setTypeface(typeface);
             paintCenterText.setTextSize(textSize);
         }
 
@@ -595,14 +595,9 @@ public class LoopView extends View {
         String text = drawingStrings.get(position).string;
         float textWidth = paintCenterText.measureText(text);
         int maxWidth = getWidth() - getPaddingLeft() - getPaddingRight(); // Adjust for padding
-
-        Log.i("drawCenterText", "textWidth:"+textWidth);
-
-        Log.i("drawCenterText", "maxWidth:"+maxWidth + " paddingLeft:"+getPaddingLeft()+" getPaddingRight():"+getPaddingRight());
         if (textWidth > maxWidth) {
-            int maxLength = (int) (maxWidth / paintCenterText.getTextSize()) - 3; // Adjust based on font size and ellipsis width
-
-            Log.i("drawCenterText", "maxLength:"+maxLength);
+            int maxLength = (int) ((maxWidth/textWidth)*text.length()) - 3;
+            //int maxLength = (int) (maxWidth / paintCenterText.getTextSize()) - 3; // Adjust based on font size and ellipsis width
             text = String.format("%s...", text.substring(0, maxLength));
         }
 
