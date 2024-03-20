@@ -592,7 +592,16 @@ public class LoopView extends View {
     }
 
     private void drawCenterText(Canvas canvas, int position) {
-        canvas.drawText(drawingStrings.get(position).string, getTextX(drawingStrings.get(position).string, paintOuterText, tempRect),
+        String text = drawingStrings.get(position).string;
+        float textWidth = paintCenterText.measureText(text);
+        int maxWidth = getWidth() - getPaddingLeft() - getPaddingRight(); // Adjust for padding
+
+        if (textWidth > maxWidth) {
+            int maxLength = (int) (maxWidth / paintCenterText.getTextSize()) - 3; // Adjust based on font size and ellipsis width
+            text = String.format("%s...", text.substring(0, maxLength));
+        }
+
+        canvas.drawText(text, getTextX(text, paintOuterText, tempRect),
                 getDrawingY(), paintCenterText);
     }
 
