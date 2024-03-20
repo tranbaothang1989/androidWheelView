@@ -596,8 +596,13 @@ public class LoopView extends View {
         float textWidth = paintCenterText.measureText(text);
         int maxWidth = getWidth() - getPaddingLeft() - getPaddingRight(); // Adjust for padding
 
+        Log.i("drawCenterText", "textWidth:"+textWidth);
+
+        Log.i("drawCenterText", "maxWidth:"+maxWidth + " paddingLeft:"+getPaddingLeft()+" getPaddingRight():"+getPaddingRight());
         if (textWidth > maxWidth) {
             int maxLength = (int) (maxWidth / paintCenterText.getTextSize()) - 3; // Adjust based on font size and ellipsis width
+
+            Log.i("drawCenterText", "maxLength:"+maxLength);
             text = String.format("%s...", text.substring(0, maxLength));
         }
 
